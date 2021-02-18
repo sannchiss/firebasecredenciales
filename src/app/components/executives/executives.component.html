@@ -1,0 +1,115 @@
+<!-- Begin page content -->
+<div class="container">
+  <div class="row">
+    <div class="align-content-sm-center">
+      <h1 class="mt-5">Listado de ejecutivos comerciales</h1>
+      <button type="button" class="btn btn-success" (click)="open(content)">
+        + Ejecutivo
+      </button>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre Completo</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let item of executivesCollection
+                | paginate
+                  : {
+                      itemsPerPage: config.itemPerPage,
+                      currentPage: config.currentPage
+                    }
+            "
+          >
+            <td> {{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.phone}}</td>
+            <td>{{item.email}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Datos de Ejecutivo</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div class="row">
+        <form [formGroup]="excutiveForm">
+          <div class="col col-lg-4">
+            <div class="form-group">
+              <label>Id</label>
+              <input
+                type="number"
+                name=""
+                id=""
+                formControlName="id"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Nombre Completo</label>
+            <input
+              type="text"
+              name=""
+              id=""
+              formControlName="name"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input
+              type="text"
+              name=""
+              id=""
+              formControlName="phone"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="">Email</label>
+            <input
+              type="email"
+              name=""
+              id=""
+              formControlName="email"
+              class="form-control"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="saveExecutive()"
+    >
+      Save
+    </button>
+    <!-- <button type="button" class="btn btn-outline-dark" (click)="ModifUser()">
+      Update
+    </button>-->
+  </div>
+</ng-template>
